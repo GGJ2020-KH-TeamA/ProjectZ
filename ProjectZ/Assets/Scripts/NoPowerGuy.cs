@@ -78,6 +78,7 @@ public class NoPowerGuy : MonoBehaviour {
         for (int i = 0 ; i < stateData.Length ; i++) {
             _bodyPartStates[ (BodyPart)i ] = (PartState)stateData[i];
         }
+        UpdateSprite();
     }
 
     public void UpdateSprite () {
@@ -86,16 +87,17 @@ public class NoPowerGuy : MonoBehaviour {
             BodyPart  part  = partAndState.Key;
             PartState state = partAndState.Value;
 
-            if (state == PartState.Broken)
-                _bodyPartGameObjects[part].SetActive(false);
-            else if (state == PartState.Normal)
-                _bodyPartGameObjects[part].SetActive(true);
-
+            if (part != BodyPart.Battery) {
+                if (state == PartState.Broken)
+                    _bodyPartGameObjects[part].SetActive(false);
+                else if (state == PartState.Normal)
+                    _bodyPartGameObjects[part].SetActive(true);
+            }
         }
 
-        if (batteryState == PartState.Broken)
+        if (_bodyPartStates[BodyPart.Battery] == PartState.Broken)
             bodySpriteRenderer.sprite = bodyUnpoweredSprite;
-        else if (batteryState == PartState.Normal)
+        else if (_bodyPartStates[BodyPart.Battery] == PartState.Normal)
             bodySpriteRenderer.sprite = bodyPoweredSprite;
 
     }
