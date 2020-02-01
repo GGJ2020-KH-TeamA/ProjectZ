@@ -71,7 +71,13 @@ public class NoPowerGuy : MonoBehaviour {
             {BodyPart.LeftLeg,   leftLegGO},
             {BodyPart.RightLeg,  rightLegGO}
         };
+    }
 
+    // stateData Example: {0, 1, 1, 1, 0, 0} : {head, leftHand, rightHand, leftLeg, rightLeg, battery} , (0 for broken, 1 for normal)
+    public void Init (int[] stateData) {
+        for (int i = 0 ; i < stateData.Length ; i++) {
+            _bodyPartStates[ (BodyPart)i ] = (PartState)stateData[i];
+        }
     }
 
     public void UpdateSprite () {
