@@ -46,37 +46,41 @@ public class PlayerControl : MonoBehaviour
         if (Input.GetKey(KeyCode.W))
         {
             movement += Vector2.up;
-            Robots[0].SetActive(true);
-            Robots[1].SetActive(false);
-            Robots[2].SetActive(false);
-            Robots[3].SetActive(false);
+            for(int i = 0; i < 4; i++)
+            {
+                if (i == 0) Robots[i].SetActive(true);
+                else Robots[i].SetActive(false);
+            }
         }
 
         if (Input.GetKey(KeyCode.A))
         {
             movement += Vector2.left;
-            Robots[0].SetActive(false);
-            Robots[1].SetActive(true);
-            Robots[2].SetActive(false);
-            Robots[3].SetActive(false);
+            for (int i = 0; i < 4; i++)
+            {
+                if (i == 1) Robots[i].SetActive(true);
+                else Robots[i].SetActive(false);
+            }
         }
 
         if (Input.GetKey(KeyCode.S))
         {
             movement += Vector2.down;
-            Robots[0].SetActive(false);
-            Robots[1].SetActive(false);
-            Robots[2].SetActive(true);
-            Robots[3].SetActive(false);
+            for (int i = 0; i < 4; i++)
+            {
+                if (i == 2) Robots[i].SetActive(true);
+                else Robots[i].SetActive(false);
+            }
         }
 
         if (Input.GetKey(KeyCode.D))
         {
             movement += Vector2.right;
-            Robots[0].SetActive(false);
-            Robots[1].SetActive(false);
-            Robots[2].SetActive(false);
-            Robots[3].SetActive(true);
+            for (int i = 0; i < 4; i++)
+            {
+                if (i == 3) Robots[i].SetActive(true);
+                else Robots[i].SetActive(false);
+            }
         }
         
         if(movement == Vector2.zero)
