@@ -121,7 +121,7 @@ MonoBehaviour:
   Speed: 2.5
   LeftBound: -4.05
   RightBound: 4.18
-  TopBound: 1.13
+  TopBound: 1.673
   BottomBound: -2.907
   GG: 0.7
 --- !u!58 &-9105825432176053211

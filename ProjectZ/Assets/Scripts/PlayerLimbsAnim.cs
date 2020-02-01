@@ -19,7 +19,7 @@ public class PlayerLimbsAnim : MonoBehaviour
 
     private void Start()
     {
-        animator = GetComponent<Animator>();
+        //animator = GetComponent<Animator>();
     }
 
     private void Walk()

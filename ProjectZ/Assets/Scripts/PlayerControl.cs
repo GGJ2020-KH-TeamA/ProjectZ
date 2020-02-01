@@ -6,13 +6,13 @@ public class PlayerControl : MonoBehaviour
 {
     public GameObject[] Robots;
 
-    private float Speed = 0.02f;
+    private float Speed = 3f;
     public int ItemID;
     public int Item1 = 8;
     public bool isBlind;
     private int HandCount = 0;
     private bool isMoving = false;
-    private bool isPlaying = false;
+    private bool isPlaying = true;
 
     public delegate void PlayerDelegate();
     public static PlayerDelegate GameOverEvent;
@@ -31,7 +31,7 @@ public class PlayerControl : MonoBehaviour
             GameOverEvent();
             isPlaying = false;
         }
-        GetComponentInChildren<PlayerRobot>().LoadLimbs(NoPowerGuyState);
+        GetComponent<PlayerRobot>().LoadLimbs(NoPowerGuyState);
     }
 
     void Update()
@@ -85,14 +85,14 @@ public class PlayerControl : MonoBehaviour
         
         if(movement == Vector2.zero)
         {
-            if (isMoving) RestEvent();
+            if (isMoving) // RestEvent();
             isMoving = false;
         }
         else
         {
             if (!isMoving) WalkEvent();
             isMoving = true;
-            transform.Translate(movement * Speed * Time.deltaTime);
+            transform.position += new Vector3(movement.x,movement.y) * Speed * Time.deltaTime;
         }
     }
     
@@ -115,7 +115,7 @@ public class PlayerControl : MonoBehaviour
                 Item1 = 8;
             }
 
-            if (collision.tag == "NoPowerGuy")
+            if (collision.tag == "RobotDown")
             {
                 collision.GetComponent<RobotDown>().InterActByPlayer(Item1);
                 Item1 = 8;
