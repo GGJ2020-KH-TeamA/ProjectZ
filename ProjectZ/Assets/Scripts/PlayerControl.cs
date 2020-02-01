@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerControl : MonoBehaviour
 {
     public GameObject[] Robots;
+    private GameObject RobotDown;
 
     private bool[] MyStates;
 
@@ -22,6 +23,15 @@ public class PlayerControl : MonoBehaviour
     public static PlayerDelegate GameOverEvent;
     public static PlayerDelegate WalkEvent;
     public static PlayerDelegate RestEvent;
+
+    private void RoundEnd()
+    {
+        RobotDown = GameObject.FindGameObjectWithTag("RobotDown");
+
+        Vector3 tmpPosition = RobotDown.transform.position;
+        RobotDown.transform.position = transform.position;
+        transform.position = tmpPosition;
+    }
 
     private void Init(bool[] RobotDown)
     {
