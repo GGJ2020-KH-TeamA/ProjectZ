@@ -817,6 +817,7 @@ GameObject:
   m_Component:
   - component: {fileID: 440033445}
   - component: {fileID: 440033444}
+  - component: {fileID: 440033446}
   m_Layer: 0
   m_Name: ConveyorMover
   m_TagString: Untagged
@@ -839,7 +840,7 @@ MonoBehaviour:
   path: {fileID: 756177838}
   slidePrefab: {fileID: 89473332}
   space: 0.5
-  speed: 0.25
+  speed: 2.5
 --- !u!4 &440033445
 Transform:
   m_ObjectHideFlags: 0
@@ -855,6 +856,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &440033446
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 440033443}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 464d44aa07c830c4dad863f2d8bcc003, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Item: {fileID: 7029765682287728455, guid: 4bebcbf30d8a5c346b7f971290ba11c2, type: 3}
 --- !u!1 &451244532
 GameObject:
   m_ObjectHideFlags: 0
@@ -1231,6 +1245,7 @@ GameObject:
   m_Component:
   - component: {fileID: 594177246}
   - component: {fileID: 594177245}
+  - component: {fileID: 594177247}
   m_Layer: 0
   m_Name: DoorRight
   m_TagString: Untagged
@@ -1302,6 +1317,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &594177247
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 594177244}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 464d44aa07c830c4dad863f2d8bcc003, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Item: {fileID: 7029765682287728455, guid: 4bebcbf30d8a5c346b7f971290ba11c2, type: 3}
 --- !u!1 &658592229
 GameObject:
   m_ObjectHideFlags: 0

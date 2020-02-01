@@ -23,9 +23,9 @@ public class ItemControl : MonoBehaviour
 
     private void Move()
     {
-        if (Mathf.Abs(transform.position.x - RightBound) < GG) transform.position += new Vector3(0, -Speed, 0);
-        if (Mathf.Abs(transform.position.x - LeftBound) < GG) transform.position += new Vector3(0, Speed, 0);
-        if (Mathf.Abs(transform.position.y - BottomBound) < GG) transform.position += new Vector3(-Speed, 0, 0);
+        if (Mathf.Abs(transform.position.x - RightBound) < GG) transform.position += new Vector3(0, -Speed * Time.deltaTime, 0);
+        if (Mathf.Abs(transform.position.x - LeftBound) < GG) transform.position += new Vector3(0, Speed * Time.deltaTime, 0);
+        if (Mathf.Abs(transform.position.y - BottomBound) < GG) transform.position += new Vector3(-Speed * Time.deltaTime, 0, 0);
         if (transform.position.y > GG + TopBound) Destroy(gameObject);
     }
 }

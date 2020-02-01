@@ -4,79 +4,118 @@ using UnityEngine;
 
 public class PlayerControl : MonoBehaviour
 {
-    public GameObject[] gameObjects;
+    public GameObject[] Robots;
+
     private float Speed = 0.02f;
     public int ItemID;
     public int Item1 = 8;
     public bool isBlind;
     private int HandCount = 0;
+    private bool isMoving = false;
+    private bool isPlaying = false;
 
     public delegate void PlayerDelegate();
     public static PlayerDelegate GameOverEvent;
     public static PlayerDelegate WalkEvent;
     public static PlayerDelegate RestEvent;
-    /*
+
     private void Init(bool[] NoPowerGuyState)
     {
-        for(int i = 0; i < 6; i ++) gameObjects[i].SetActive(NoPowerGuyState[i]);
         isBlind = NoPowerGuyState[0];
         if (NoPowerGuyState[1]) HandCount++;
         if (NoPowerGuyState[2]) HandCount++;
         if (NoPowerGuyState[3]) Speed += 0.01f;
         if (NoPowerGuyState[4]) Speed += 0.01f;
-        if (NoPowerGuyState[5]) GameOverEvent();
+        if (!NoPowerGuyState[5])
+        {
+            GameOverEvent();
+            isPlaying = false;
+        }
+        GetComponentInChildren<PlayerRobot>().LoadLimbs(NoPowerGuyState);
     }
-    */
+
     void Update()
     {
+        if(isPlaying) Walk();
+    }
+    
+    private void Walk()
+    {
+        Vector2 movement = Vector2.zero;
+
         if (Input.GetKey(KeyCode.W))
         {
-            transform.Translate(Vector2.up * Speed);
+            movement += Vector2.up;
+            Robots[0].SetActive(true);
+            Robots[1].SetActive(false);
+            Robots[2].SetActive(false);
+            Robots[3].SetActive(false);
         }
 
         if (Input.GetKey(KeyCode.A))
         {
-            transform.Translate(Vector2.left * Speed);
+            movement += Vector2.left;
+            Robots[0].SetActive(false);
+            Robots[1].SetActive(true);
+            Robots[2].SetActive(false);
+            Robots[3].SetActive(false);
         }
 
         if (Input.GetKey(KeyCode.S))
         {
-            transform.Translate(Vector2.down * Speed);
+            movement += Vector2.down;
+            Robots[0].SetActive(false);
+            Robots[1].SetActive(false);
+            Robots[2].SetActive(true);
+            Robots[3].SetActive(false);
         }
 
         if (Input.GetKey(KeyCode.D))
         {
-            transform.Translate(Vector2.right * Speed);
+            movement += Vector2.right;
+            Robots[0].SetActive(false);
+            Robots[1].SetActive(false);
+            Robots[2].SetActive(false);
+            Robots[3].SetActive(true);
         }
-        //Walk();
+        
+        if(movement == Vector2.zero)
+        {
+            if (isMoving) RestEvent();
+            isMoving = false;
+        }
+        else
+        {
+            if (!isMoving) WalkEvent();
+            isMoving = true;
+            transform.Translate(movement * Speed * Time.deltaTime);
+        }
     }
-    /*
-    private void Walk()
-    {
-        if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D)) WalkEvent();
-    }
-    */
+    
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.tag == "Item")
+        if (isPlaying)
         {
-            ItemID = collision.gameObject.GetComponent<Item>().ID;
-            if (Item1 == 8)
+            if (collision.tag == "Item")
             {
-                Item1 = ItemID;
-                Destroy(collision.gameObject);
+                ItemID = collision.gameObject.GetComponent<Item>().ID;
+                if (Item1 == 8)
+                {
+                    Item1 = ItemID;
+                    Destroy(collision.gameObject);
+                }
             }
-        }
 
-        if(collision.tag == "TrashCan")
-        {
-            Item1 = 8;
-        }
+            if (collision.tag == "TrashCan")
+            {
+                Item1 = 8;
+            }
 
-        if(collision.tag == "NoPowerGuy")
-        {
-            //collision.GetComponent<NoPowerGuy>().InterActByPlayer(Item1);
-            Item1 = 8;
+            if (collision.tag == "NoPowerGuy")
+            {
+                collision.GetComponent<RobotDown>().InterActByPlayer(Item1);
+                Item1 = 8;
+            }
         }
     }
 }
