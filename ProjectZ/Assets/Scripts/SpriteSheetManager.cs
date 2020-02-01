@@ -20,7 +20,7 @@ public class SpriteSheetManager : MonoBehaviour {
     Sprite[] _nowSprites      = new Sprite[0];
     int      _nowSpritesIndex = 0;
 
-    void Start () {
+    void Awake () {
         _spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
     }
 
@@ -39,22 +39,42 @@ public class SpriteSheetManager : MonoBehaviour {
 
     }
 
-    public void PlayAnim (string animName, float interval) {
-
-        foreach (SpriteData data in spriteDatas) {
-
-            if (data.name == animName) {
-
-                _isAnimPlaying   = true;
-                _nowInterval     = interval;
-                _prevSpriteTime  = Time.realtimeSinceStartup;
-                _nowSprites      = data.sprites;
+    public void LoadAnim(string animName)
+    {
+        foreach (SpriteData data in spriteDatas)
+        {
+            if (data.name == animName)
+            {
+                _nowSprites = data.sprites;
                 _nowSpritesIndex = 0;
             }
         }
 
         // set the 1st sprite
-        _spriteRenderer.sprite = _nowSprites[0];
+        SetAnimFrame(0);
+    }
+
+    public void PlayAnim (string animName, float interval) {
+
+        
+    }
+
+    public void SetAnimFrame(int index)
+    {
+        if (_nowSprites.Length == 0)
+        {
+            _spriteRenderer.sprite = null;
+            _nowSpritesIndex = 0;
+            return;
+        }
+
+        _nowSpritesIndex = index % _nowSprites.Length;
+        _spriteRenderer.sprite = _nowSprites[_nowSpritesIndex];
+    }
+
+    public void NextFrame()
+    {
+        SetAnimFrame(_nowSpritesIndex + 1);
     }
 
     public void SetAnimInterval (float interval) {
@@ -64,4 +84,6 @@ public class SpriteSheetManager : MonoBehaviour {
     public void StopAnim () {
         _isAnimPlaying = false;
     }
+
+    
 }

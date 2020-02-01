@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class PlayerControl : MonoBehaviour
 {
+    public static PlayerControl Instance { get; private set; }
+
     public GameObject[] Robots;
     private GameObject RobotDown;
 
@@ -15,9 +17,12 @@ public class PlayerControl : MonoBehaviour
     public int Item2 = 8;
     public bool isBlind = false;
     private int HandCount = 0;
-    private bool isMoving = false;
+    public bool isMoving { get; private set; }
+    public Vector2 direction { get; private set; }
     private bool isPlaying = true;
     private int BreakProbability = 50;
+
+    private Rigidbody2D rigidbody;
 
     public delegate void PlayerDelegate();
     public static PlayerDelegate GameOverEvent;
@@ -60,6 +65,12 @@ public class PlayerControl : MonoBehaviour
         return MyStates;
     }
 
+    void Awake()
+    {
+        Instance = this;
+        rigidbody = GetComponent<Rigidbody2D>();
+    }
+
     void Update()
     {
         if(isPlaying) Walk();
@@ -69,57 +80,40 @@ public class PlayerControl : MonoBehaviour
     {
         Vector2 movement = Vector2.zero;
 
-        if (Input.GetKey(KeyCode.W))
-        {
-            movement += Vector2.up;
-            for(int i = 0; i < 4; i++)
-            {
-                if (i == 0) Robots[i].SetActive(true);
-                else Robots[i].SetActive(false);
-            }
-        }
-
-        if (Input.GetKey(KeyCode.A))
-        {
-            movement += Vector2.left;
-            for (int i = 0; i < 4; i++)
-            {
-                if (i == 1) Robots[i].SetActive(true);
-                else Robots[i].SetActive(false);
-            }
-        }
-
-        if (Input.GetKey(KeyCode.S))
-        {
-            movement += Vector2.down;
-            for (int i = 0; i < 4; i++)
-            {
-                if (i == 2) Robots[i].SetActive(true);
-                else Robots[i].SetActive(false);
-            }
-        }
-
-        if (Input.GetKey(KeyCode.D))
-        {
-            movement += Vector2.right;
-            for (int i = 0; i < 4; i++)
-            {
-                if (i == 3) Robots[i].SetActive(true);
-                else Robots[i].SetActive(false);
-            }
-        }
+        if (Input.GetKey(KeyCode.W)) movement += Vector2.up;
+        if (Input.GetKey(KeyCode.A)) movement += Vector2.left;
+        if (Input.GetKey(KeyCode.S)) movement += Vector2.down;
+        if (Input.GetKey(KeyCode.D)) movement += Vector2.right;
         
         if(movement == Vector2.zero)
         {
-            if (isMoving) // RestEvent();
-            isMoving = false;
+            if (isMoving)
+            {
+                // RestEvent();
+                isMoving = false;
+            }
+            rigidbody.velocity = Vector2.zero;
         }
         else
         {
-            if (!isMoving) WalkEvent();
-            isMoving = true;
-            transform.position += new Vector3(movement.x,movement.y) * Speed * Time.deltaTime;
+            if (!isMoving)
+            {
+                // WalkEvent();
+                isMoving = true;
+            }
+            //transform.position += GetMovement(movement) * Speed * Time.deltaTime;
+            rigidbody.velocity = GetMovement(movement) * Speed;
         }
+
+        
+
+        direction = movement;
+    }
+
+    private Vector2 GetMovement(Vector2 dir)
+    {
+        float angle = Vector2.SignedAngle(Vector2.right, dir);
+        return new Vector2(Mathf.Cos(angle * Mathf.Deg2Rad), Mathf.Sin(angle * Mathf.Deg2Rad));
     }
     
     private void OnTriggerEnter2D(Collider2D collision)
@@ -128,16 +122,20 @@ public class PlayerControl : MonoBehaviour
         {
             if (collision.tag == "Item")
             {
-                ItemID = collision.gameObject.GetComponent<Item>().ID;
-                if (Item1 == 8)
+                ItemController itemController = collision.gameObject.GetComponent<ItemController>();
+                if (itemController)
                 {
-                    Item1 = ItemID;
-                    Destroy(collision.gameObject);
-                }
-                else if(Item2 == 8)
-                {
-                    Item2 = ItemID;
-                    Destroy(collision.gameObject);
+                    ItemID = itemController.ID;
+                    if (Item1 == 8)
+                    {
+                        Item1 = ItemID;
+                        ItemManager.Instance.PickItem(itemController);
+                    }
+                    else if (Item2 == 8)
+                    {
+                        Item2 = ItemID;
+                        ItemManager.Instance.PickItem(itemController);
+                    }
                 }
             }
 
