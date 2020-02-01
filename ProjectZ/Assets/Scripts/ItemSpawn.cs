@@ -21,6 +21,6 @@ public class ItemSpawn : MonoBehaviour
 
     private void SpawnItem()
     {
-        Instantiate(Item, transform);
+        Instantiate(Item, transform.position, Quaternion.Euler(0, 0, Random.Range(0, 360)));
     }
 }

@@ -6,32 +6,48 @@ public class PlayerControl : MonoBehaviour
 {
     public GameObject[] Robots;
 
+    private bool[] MyStates;
+
     private float Speed = 3f;
     public int ItemID;
     public int Item1 = 8;
-    public bool isBlind;
+    public int Item2 = 8;
+    public bool isBlind = false;
     private int HandCount = 0;
     private bool isMoving = false;
     private bool isPlaying = true;
+    private int BreakProbability = 50;
 
     public delegate void PlayerDelegate();
     public static PlayerDelegate GameOverEvent;
     public static PlayerDelegate WalkEvent;
     public static PlayerDelegate RestEvent;
 
-    private void Init(bool[] NoPowerGuyState)
+    private void Init(bool[] RobotDown)
     {
-        isBlind = NoPowerGuyState[0];
-        if (NoPowerGuyState[1]) HandCount++;
-        if (NoPowerGuyState[2]) HandCount++;
-        if (NoPowerGuyState[3]) Speed += 0.01f;
-        if (NoPowerGuyState[4]) Speed += 0.01f;
-        if (!NoPowerGuyState[5])
+        isBlind = RobotDown[0];
+        if (RobotDown[1]) HandCount++;
+        if (RobotDown[2]) HandCount++;
+        if (RobotDown[3]) Speed += 1f;
+        if (RobotDown[4]) Speed += 1f;
+        if (!RobotDown[5])
         {
             GameOverEvent();
             isPlaying = false;
         }
-        GetComponent<PlayerRobot>().LoadLimbs(NoPowerGuyState);
+        GetComponent<PlayerRobot>().LoadLimbs(RobotDown);
+        MyStates = RobotDown;
+    }
+
+    public bool[] Remain()
+    {
+        //BreakProbability = 5 * 關卡數;
+        for(int i = 0; i < MyStates.Length; i++)
+        {
+            if (MyStates[i] && Random.Range(0, 100) < BreakProbability) MyStates[i] = false;
+        }
+
+        return MyStates;
     }
 
     void Update()
@@ -108,17 +124,30 @@ public class PlayerControl : MonoBehaviour
                     Item1 = ItemID;
                     Destroy(collision.gameObject);
                 }
+                else if(Item2 == 8)
+                {
+                    Item2 = ItemID;
+                    Destroy(collision.gameObject);
+                }
             }
 
             if (collision.tag == "TrashCan")
             {
                 Item1 = 8;
+                Item2 = 8;
             }
 
             if (collision.tag == "RobotDown")
             {
-                collision.GetComponent<RobotDown>().InterActByPlayer(Item1);
-                Item1 = 8;
+                if (collision.GetComponent<RobotDown>().InterActByPlayer(Item1))
+                {
+                    Item1 = Item2;
+                    Item2 = 8;
+                }
+                if (collision.GetComponent<RobotDown>().InterActByPlayer(Item2))
+                {
+                    Item2 = 8;
+                }
             }
         }
     }
