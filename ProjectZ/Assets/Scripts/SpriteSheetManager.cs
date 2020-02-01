@@ -4,8 +4,16 @@ using UnityEngine;
 
 public class SpriteSheetManager : MonoBehaviour {
 
+    [System.Serializable]
+    public struct SpriteData
+    {
+        public string name;
+        public Sprite[] sprites;
+    }
+
     SpriteRenderer               _spriteRenderer;
-    Dictionary<string, Sprite[]> _animSprites = new Dictionary<string, Sprite[]>();
+    public Dictionary<string, Sprite[]> _animSprites = new Dictionary<string, Sprite[]>();
+    public SpriteData[] spriteDatas;
 
     bool     _isAnimPlaying   = false;
     float    _prevSpriteTime  = 0f;
