@@ -6,13 +6,13 @@ public class Item : MonoBehaviour
 {
     public int ID;
     private int Probability;
-    private int HeadProbability = 18;
-    private int HandProbability = 36;
-    private int LegProbability = 54;
-    private int BatteryProbability = 72;
-    private int WeldGunProbability = 81;
-    private int WrenchProbability = 90;
-    private int GlueProbability = 99;
+    private int HeadProbability = 13;
+    private int HandProbability = 33;
+    private int LegProbability = 53;
+    private int BatteryProbability = 65;
+    private int WeldGunProbability = 75;
+    private int WrenchProbability = 85;
+    private int GlueProbability = 95;
     
     public Sprite[] sprites;
 
