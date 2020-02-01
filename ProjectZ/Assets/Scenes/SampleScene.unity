@@ -2516,6 +2516,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1314894699}
+  - component: {fileID: 1314894700}
   m_Layer: 0
   m_Name: Robot Down
   m_TagString: Untagged
@@ -2543,6 +2544,33 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1314894700
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1314894698}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bdc35abe4f8ba48629dc97d53863a8e7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  headGO: {fileID: 927460554}
+  leftHandGO: {fileID: 451244532}
+  rightHandGO: {fileID: 2038820447}
+  leftLegGO: {fileID: 1861871351}
+  rightLegGO: {fileID: 284097968}
+  bodySpriteRenderer: {fileID: 1195777596}
+  bodyPoweredSprite: {fileID: 21300000, guid: 0ef3b5e60daea40f097f3769ca2a89f7, type: 3}
+  bodyUnpoweredSprite: {fileID: 21300000, guid: 0ef3b5e60daea40f097f3769ca2a89f7,
+    type: 3}
+  headState: 0
+  leftHandState: 0
+  rightHandState: 0
+  leftLegState: 0
+  rightLegState: 0
+  batteryState: 0
 --- !u!1 &1438478511
 GameObject:
   m_ObjectHideFlags: 0

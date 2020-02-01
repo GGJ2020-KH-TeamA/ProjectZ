@@ -5,15 +5,14 @@ using UnityEngine;
 public class SpriteSheetManager : MonoBehaviour {
 
     [System.Serializable]
-    public struct SpriteData
-    {
+    public struct SpriteData {
         public string name;
         public Sprite[] sprites;
     }
 
-    SpriteRenderer               _spriteRenderer;
-    public Dictionary<string, Sprite[]> _animSprites = new Dictionary<string, Sprite[]>();
     public SpriteData[] spriteDatas;
+
+    SpriteRenderer _spriteRenderer;
 
     bool     _isAnimPlaying   = false;
     float    _prevSpriteTime  = 0f;
@@ -22,9 +21,7 @@ public class SpriteSheetManager : MonoBehaviour {
     int      _nowSpritesIndex = 0;
 
     void Start () {
-
         _spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
-        // _animSprites["default"] = (Load Sprites)
     }
 
     void Update () {
@@ -44,11 +41,17 @@ public class SpriteSheetManager : MonoBehaviour {
 
     public void PlayAnim (string animName, float interval) {
 
-        _isAnimPlaying   = true;
-        _nowInterval     = interval;
-        _prevSpriteTime  = Time.realtimeSinceStartup;
-        _nowSprites      = _animSprites[animName];
-        _nowSpritesIndex = 0;
+        foreach (SpriteData data in spriteDatas) {
+
+            if (data.name == animName) {
+
+                _isAnimPlaying   = true;
+                _nowInterval     = interval;
+                _prevSpriteTime  = Time.realtimeSinceStartup;
+                _nowSprites      = data.sprites;
+                _nowSpritesIndex = 0;
+            }
+        }
 
         // set the 1st sprite
         _spriteRenderer.sprite = _nowSprites[0];

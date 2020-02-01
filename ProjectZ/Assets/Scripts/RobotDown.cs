@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class NoPowerGuy : MonoBehaviour {
+public class RobotDown : MonoBehaviour {
 
     public enum ItemID {
         Head    = 0,
@@ -71,12 +71,15 @@ public class NoPowerGuy : MonoBehaviour {
             {BodyPart.LeftLeg,   leftLegGO},
             {BodyPart.RightLeg,  rightLegGO}
         };
+        
+        UpdateSprite();
     }
 
-    // stateData Example: {0, 1, 1, 1, 0, 0} : {head, leftHand, rightHand, leftLeg, rightLeg, battery} , (0 for broken, 1 for normal)
-    public void Init (int[] stateData) {
+    // stateData Example: {false, true, true, false, false, false} : {head, leftHand, rightHand, leftLeg, rightLeg, battery} , (0 for broken, 1 for normal)
+    public void Init (bool[] stateData) {
         for (int i = 0 ; i < stateData.Length ; i++) {
-            _bodyPartStates[ (BodyPart)i ] = (PartState)stateData[i];
+            int intValueFromBool = stateData[i] ? 1 : 0;
+            _bodyPartStates[ (BodyPart)i ] = (PartState)intValueFromBool;
         }
         UpdateSprite();
     }
@@ -165,12 +168,14 @@ public class NoPowerGuy : MonoBehaviour {
         return false;
     }
 
-    public int[] GetBodyPartStateData () {
+    public bool[] GetStateData () {
 
-        int[] result = new int[_bodyPartStates.Count];
+        bool[] result = new bool[_bodyPartStates.Count];
 
         foreach (KeyValuePair<BodyPart, PartState> partState in _bodyPartStates) {
-            result[ (int)partState.Key ] = (int)partState.Value;
+
+            bool boolValueFromInt = (int)partState.Value != 0;
+            result[ (int)partState.Key ] = boolValueFromInt;
         }
 
         return result;
