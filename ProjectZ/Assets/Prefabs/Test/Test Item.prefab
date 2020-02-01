@@ -96,15 +96,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 538463c9c7cf01b4babe702362ac0ef2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ID: 0
   sprites:
-  - {fileID: 21300000, guid: 0a5633dd256610b48acc70dc3e6407b7, type: 3}
-  - {fileID: 21300000, guid: 695870d263a5861458249548ce843c0d, type: 3}
-  - {fileID: 21300000, guid: 3350a53c9988f1f40bbcd99d1bfbe74a, type: 3}
-  - {fileID: 21300000, guid: f9cf70548e71f424db475f79e92f0f25, type: 3}
-  - {fileID: 21300000, guid: 7517d3c9d0abb824b948f76c685b9862, type: 3}
-  - {fileID: 21300000, guid: e7bc45b937566ac4a9ed0abe6a13c639, type: 3}
-  - {fileID: 21300000, guid: 2d80924076009e14db49794b22b38a40, type: 3}
-  - {fileID: 21300000, guid: 295f5f2c6c512364499f64c2044dff59, type: 3}
+  - {fileID: 21300000, guid: 3c3910cca8908ac499f54c270f657c33, type: 3}
+  - {fileID: 21300000, guid: e9fe0aa83f23dad4ba74c3a696afab90, type: 3}
+  - {fileID: 21300000, guid: acd6b9ce25542b24082b9ac1a2fe439b, type: 3}
+  - {fileID: 21300000, guid: 0a26ff0d5888b6943bfdc1653b18b7ec, type: 3}
+  - {fileID: 21300000, guid: a4eecae512f34ef48adfe1d3616e09a9, type: 3}
+  - {fileID: 21300000, guid: 5eb3ef7e77eb5fe4aa042824d176ea43, type: 3}
+  - {fileID: 21300000, guid: f43a6eef713336645ae2d23e8084247a, type: 3}
+  - {fileID: 21300000, guid: a491b3534f6a12048bf5beb03d97878c, type: 3}
 --- !u!114 &7029765682287728458
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -117,9 +118,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b33eb15ebf5c1941906744d810b985b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Speed: 0.015
-  LeftBound: -3.903
-  RightBound: 3.903
+  Speed: 0.01
+  LeftBound: -4.05
+  RightBound: 4.18
   TopBound: 1.13
   BottomBound: -2.907
   GG: 0.7
