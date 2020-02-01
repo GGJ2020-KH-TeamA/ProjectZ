@@ -71,7 +71,7 @@ public class RobotDown : MonoBehaviour {
             {BodyPart.LeftLeg,   leftLegGO},
             {BodyPart.RightLeg,  rightLegGO}
         };
-        
+
         UpdateSprite();
     }
 
@@ -179,5 +179,20 @@ public class RobotDown : MonoBehaviour {
         }
 
         return result;
+    }
+
+    public int[] GetMissing () {
+        List<int> resultList = new List<int>();
+        bool[] data = GetStateData();
+
+        for (int i = 0 ; i < data.Length ; i++)
+            if (!data[i])
+                resultList.Add(i);
+
+        return resultList.ToArray();
+    }
+
+    public int[] GetStandByItem () {
+        return tempItems.ToArray();
     }
 }
