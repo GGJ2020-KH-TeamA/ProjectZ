@@ -3179,6 +3179,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c4cec4673c1dd417b91be56b72496acc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameState: 0
 --- !u!4 &850159980
 Transform:
   m_ObjectHideFlags: 0
@@ -5033,6 +5034,7 @@ MonoBehaviour:
     probability: 5
     sprite: {fileID: 21300000, guid: cbfa39ea440af4c978737e6a9e5746d3, type: 3}
   itemSpanSpace: 1.5
+  converyorMover: {fileID: 440033444}
 --- !u!4 &1230575635
 Transform:
   m_ObjectHideFlags: 0

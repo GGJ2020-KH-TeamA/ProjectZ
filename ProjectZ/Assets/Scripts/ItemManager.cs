@@ -21,6 +21,7 @@ public class ItemManager : MonoBehaviour
 
     [Header("Spawn Setup")]
     public float itemSpanSpace = 2f;
+    public ConveryorMover converyorMover;
 
     private List<ItemController> itemControllers = new List<ItemController>();
 
@@ -38,30 +39,30 @@ public class ItemManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        bool isForward = ConveryorMover.Instance.speed > 0;
-        bool isReverse = ConveryorMover.Instance.speed < 0;
+        bool isForward = converyorMover.speed > 0;
+        bool isReverse = converyorMover.speed < 0;
 
         if (isForward)
         {
-            float firstPosition = ConveryorMover.Instance.GetFirstPosition();
+            float firstPosition = converyorMover.GetFirstPosition();
             if (firstPosition >= itemSpanSpace || firstPosition < 0)
             {
                 GameObject go = CreateItem();
-                ConveryorMover.Instance.PutItemAtBegin(go.transform);
+                converyorMover.PutItemAtBegin(go.transform);
             }
         }
         else if (isReverse)
         {
-            float lastPosition = ConveryorMover.Instance.GetLastPosition();
-            float totalDistance = ConveryorMover.Instance.GetTotalDistance();
+            float lastPosition = converyorMover.GetLastPosition();
+            float totalDistance = converyorMover.GetTotalDistance();
             if (lastPosition <= totalDistance - itemSpanSpace || lastPosition < 0)
             {
                 GameObject go = CreateItem();
-                ConveryorMover.Instance.PutItemAtEnd(go.transform);
+                converyorMover.PutItemAtEnd(go.transform);
             }
         }
 
-        List<Transform> outsideItems = ConveryorMover.Instance.GetOutsideItems();
+        List<Transform> outsideItems = converyorMover.GetOutsideItems();
         List<ItemController> removeItems = new List<ItemController>();
         for (int i = 0; i < itemControllers.Count; i++)
         {
@@ -119,7 +120,7 @@ public class ItemManager : MonoBehaviour
 
         itemControllers.Remove(itemController);
 
-        ConveryorMover.Instance.DetachItem(itemController.transform);
+        converyorMover.DetachItem(itemController.transform);
 
         Destroy(itemController.gameObject);
     }
