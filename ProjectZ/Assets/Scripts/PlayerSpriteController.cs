@@ -18,15 +18,12 @@ public class PlayerSpriteController : MonoBehaviour
     private bool isPlaying = false;
     private float animTimer = 0;
 
-    private void OnEnable()
+    public void SetPart(bool[] parts)
     {
-        //PlayerControl.WalkEvent += Walk;
-        //PlayerControl.WalkEvent += Rest;
-    }
-    private void OnDisable()
-    {
-        //PlayerControl.WalkEvent -= Walk;
-        //PlayerControl.WalkEvent -= Rest;
+        for (int i = 0; i < Mathf.Min(parts.Length, spriteSheetManagers.Length); i++)
+        {
+            spriteSheetManagers[i].gameObject.SetActive(parts[i]);
+        }
     }
 
     private void Start()

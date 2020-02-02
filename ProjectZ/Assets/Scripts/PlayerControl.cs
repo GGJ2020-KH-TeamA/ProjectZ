@@ -7,6 +7,7 @@ public class PlayerControl : MonoBehaviour
     public static PlayerControl Instance { get; private set; }
 
     public ItemManager itemManager;
+    public PlayerSpriteController playerSpriteController;
     private GameObject RobotDown;
 
     private bool[] MyStates;
@@ -51,20 +52,25 @@ public class PlayerControl : MonoBehaviour
         Init(MyStates);
     }
 
-    public void Init(bool[] RobotDown)
+
+    public void Init(bool[] parts)
     {
-        isBlind = RobotDown[0];
-        if (RobotDown[1]) HandCount++;
-        if (RobotDown[2]) HandCount++;
-        if (RobotDown[3]) Speed += 1f;
-        if (RobotDown[4]) Speed += 1f;
-        if (!RobotDown[5])
+        Speed = 3f;
+        isBlind = parts[0];
+        if (parts[1]) HandCount++;
+        if (parts[2]) HandCount++;
+        if (parts[3]) Speed += 1f;
+        if (parts[4]) Speed += 1f;
+        if (!parts[5])
         {
             GameOverEvent();
             isPlaying = false;
         }
-        GetComponent<PlayerRobot>().LoadLimbs(RobotDown);
-        MyStates = RobotDown;
+
+        playerSpriteController.SetPart(parts);
+        //GetComponent<PlayerRobot>().LoadLimbs(parts);
+
+        MyStates = parts;
     }
 
     public bool[] Remain()

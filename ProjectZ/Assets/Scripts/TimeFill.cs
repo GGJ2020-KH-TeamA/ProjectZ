@@ -5,10 +5,13 @@ using UnityEngine;
 public class TimeFill : MonoBehaviour
 {
     public Timer Timer;
+
+    public Vector3 fullPosition;
+    public Vector3 emptyPosition;
     
     void Update()
     {
-        transform.localPosition = new Vector3(-4.5f + 5.6f * (Timer.TimeLeft / Timer.Maxtime), 0.15f, 0);
-        transform.localScale = new Vector3(Timer.TimeLeft / Timer.Maxtime, 1, 1);
+        transform.localPosition = Vector3.Lerp(emptyPosition, fullPosition, Mathf.Clamp01(Timer.TimeLeft / Timer.Maxtime));
     }
+
 }

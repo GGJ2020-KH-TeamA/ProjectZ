@@ -10,12 +10,14 @@ public class CameraEffect : MonoBehaviour
     public GameObject blockScreen;
     public SpriteRenderer fadeSprite;
 
+    public System.Action oncolorfinish;
     private Color from;
     private Color to;
 
     private float timer;
     private float duration;
 
+    public System.Action onposfinish;
     private Vector2 frompos;
     private Vector2 topos;
     private float timerpos;
@@ -45,6 +47,11 @@ public class CameraEffect : MonoBehaviour
             timer += Time.deltaTime;
             float progress = Mathf.Clamp01(timer / duration);
             fadeSprite.color = Color.Lerp(from, to, progress);
+            if (progress >= 1)
+            {
+                if (oncolorfinish != null) oncolorfinish();
+                oncolorfinish = null;
+            }
         }
 
         if (timerpos < durationpos)
@@ -53,6 +60,11 @@ public class CameraEffect : MonoBehaviour
             float progress = Mathf.Clamp01(timerpos / durationpos);
             Vector2 pos = Vector2.Lerp(frompos, topos, easeInOutQuad(progress, 0, 1, 1));
             transform.position = new Vector3(pos.x, pos.y, transform.position.z);
+            if (progress >= 1)
+            {
+                if (onposfinish != null) onposfinish();
+                oncolorfinish = null;
+            }
         }
     }
 
