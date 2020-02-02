@@ -17,24 +17,40 @@ public class PobotDownNeedDialog : MonoBehaviour
     {
         Need1Sprite = Need1.GetComponent<SpriteRenderer>().sprite;
     }
-    
+
     void Update()
     {
-        //Timer += Time.deltaTime;
+        Timer += Time.deltaTime;
         NeedItem = RobotDown.GetEatable();
         ReflashSprite();
     }
 
     private void ReflashSprite()
     {
-        for (int i = 0; i <= NeedItem.Length; i++)
+        if (Timer >= 1)
         {
-            if (NeedItem[i])
+
+            bool hasSomeThing = false;
+            int ccount = 0;
+            for (int i = Count; true; i=(i+1)%8)
             {
-                Need1Sprite = sprites[i];
-                break;
+
+                if (NeedItem[i])
+                {
+                    Need1.GetComponent<SpriteRenderer>().sprite = sprites[i];
+                    Count = (i + 1) % 8;
+                    hasSomeThing = true;
+                    break;
+                }
+                if (i == Count)
+                    ccount++;
+                if (ccount == 2)
+                    break;
             }
+            if (!hasSomeThing)
+                Need1.GetComponent<SpriteRenderer>().sprite = sprites[8];
+            Timer = 0;
         }
-        
+
     }
 }
