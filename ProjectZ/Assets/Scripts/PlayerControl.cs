@@ -10,7 +10,7 @@ public class PlayerControl : MonoBehaviour
     public PlayerSpriteController playerSpriteController;
     private GameObject RobotDown;
 
-    private bool[] MyStates;
+    public bool[] MyStates;
 
     private float Speed = 3f;
     public int ItemID;
@@ -82,12 +82,14 @@ public class PlayerControl : MonoBehaviour
     
     void Update()
     {
-        if(isPlaying) Walk();
+        Walk();
     }
     
     private void Walk()
     {
         Vector2 movement = Vector2.zero;
+
+        if (!isPlaying) return;
 
         if (Input.GetKey(KeyCode.W)) movement += Vector2.up;
         if (Input.GetKey(KeyCode.A)) movement += Vector2.left;

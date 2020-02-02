@@ -15,7 +15,7 @@ public class Main : MonoBehaviour
         TitleToGame,
         GamePrepare,
         Gaming,
-        GameTimeup,
+        GameRoundClear,
         GameFail
     }
     public int gameRound = 0;
@@ -25,7 +25,10 @@ public class Main : MonoBehaviour
     public ItemManager itemManager;
     public PlayerControl playerControl;
     public RobotDown robotDown;
+    public ConveryorMover converyorMover;
     public Timer timer;
+
+    public float roundClearTimer = 0f;
 
     // Start is called before the first frame update
     void Start()
@@ -65,6 +68,8 @@ public class Main : MonoBehaviour
                         playerControl.Init(new bool[] { true, true, true, true, true, true });
                         playerControl.transform.position = defaultPlayerPosition;
 
+                        robotDown.Init(new bool[] { true, false, true, true, true, true });
+
                         gameState = GameState.TitleToGame;
                         CameraEffect.Instance.onposfinish = ReadyToGame;
                         CameraEffect.Instance.MoveTo(new Vector2(0, 0), 1f);
@@ -74,6 +79,25 @@ public class Main : MonoBehaviour
             case GameState.GamePrepare:
                 {
                     gameState = GameState.Gaming;
+                    break;
+                }
+            case GameState.Gaming:
+                {
+                    GamingLogic();
+                    break;
+                }
+            case GameState.GameRoundClear:
+                {
+                    if (roundClearTimer > 0)
+                    {
+                        roundClearTimer -= Time.deltaTime;
+                        if (roundClearTimer <= 0)
+                        {
+                            CameraEffect.Instance.oncolorfinish = NextRoundPrepare;
+                            CameraEffect.Instance.FadeOut(1.5f);
+                            Debug.Log("Fade Out");
+                        }
+                    }
                     break;
                 }
             default:
@@ -86,6 +110,60 @@ public class Main : MonoBehaviour
         //}
     }
 
+    private void NextRoundPrepare()
+    {
+        gameRound++;
+
+        Vector3 tmpPosition = robotDown.transform.position;
+        robotDown.transform.position = playerControl.transform.position;
+        playerControl.transform.position = tmpPosition;
+
+        playerControl.Remain();
+
+        bool[] tmpState = robotDown.GetStateData();
+        robotDown.Init(playerControl.MyStates);
+        playerControl.Init(tmpState);
+
+        timer.Reset();
+        itemManager.enableSpawn = true;
+
+        converyorMover.speed = 2;
+
+        CameraEffect.Instance.oncolorfinish = GoNextRound;
+        CameraEffect.Instance.FadeIn(1f);
+    }
+
+    private void GoNextRound()
+    {
+        playerControl.isPlaying = true;
+        
+        timer.StartTimer();
+
+        gameState = GameState.Gaming;
+    }
+
+    private void GamingLogic()
+    {
+        // Check Is All Fix
+        if (robotDown.IsAllFix)
+        {
+            playerControl.isPlaying = false;
+            timer.StopTimer();
+            roundClearTimer = 3f;
+            gameState = GameState.GameRoundClear;
+            
+            return;
+        }
+
+        // Check Timesup
+        if (!timer.active)
+        {
+            playerControl.isPlaying = false;
+            gameState = GameState.GameFail;
+            return;
+        }
+    }
+
     private void ReadyToGame()
     {
         gameState = GameState.GamePrepare;
@@ -96,6 +174,8 @@ public class Main : MonoBehaviour
 
         timer.Reset();
         timer.StartTimer();
+
+        converyorMover.speed = 2;
     }
 
    

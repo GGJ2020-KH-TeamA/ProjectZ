@@ -46,6 +46,20 @@ public class RobotDown : MonoBehaviour {
     public PartState rightLegState;
     public PartState batteryState;
 
+    public bool IsAllFix
+    {
+        get {
+            return headState == PartState.Normal && leftHandState == PartState.Normal && rightHandState == PartState.Normal && leftLegState == PartState.Normal && rightHandState == PartState.Normal && batteryState == PartState.Normal;
+        }
+    }
+
+    public bool IsCanPlayNextRound
+    {
+        get {
+            return batteryState == PartState.Normal;
+        }
+    }
+
 
     // private properties
     Dictionary<BodyPart, PartState>  _bodyPartStates;
@@ -85,6 +99,13 @@ public class RobotDown : MonoBehaviour {
     }
 
     public void UpdateSprite () {
+
+        headState = _bodyPartStates[BodyPart.Head];
+        leftHandState = _bodyPartStates[BodyPart.LeftHand];
+        rightHandState = _bodyPartStates[BodyPart.RightHand];
+        leftLegState = _bodyPartStates[BodyPart.LeftLeg];
+        rightLegState = _bodyPartStates[BodyPart.RightLeg];
+        batteryState = _bodyPartStates[BodyPart.Battery];
 
         foreach (var partAndState in _bodyPartStates) {
             BodyPart  part  = partAndState.Key;

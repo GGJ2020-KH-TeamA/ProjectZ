@@ -50,7 +50,6 @@ public class CameraEffect : MonoBehaviour
             if (progress >= 1)
             {
                 if (oncolorfinish != null) oncolorfinish();
-                oncolorfinish = null;
             }
         }
 
@@ -63,7 +62,6 @@ public class CameraEffect : MonoBehaviour
             if (progress >= 1)
             {
                 if (onposfinish != null) onposfinish();
-                oncolorfinish = null;
             }
         }
     }
