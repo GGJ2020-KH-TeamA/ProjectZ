@@ -46,6 +46,20 @@ public class RobotDown : MonoBehaviour {
     public PartState rightLegState;
     public PartState batteryState;
 
+    public bool IsAllFix
+    {
+        get {
+            return headState == PartState.Normal && leftHandState == PartState.Normal && rightHandState == PartState.Normal && leftLegState == PartState.Normal && rightHandState == PartState.Normal && batteryState == PartState.Normal;
+        }
+    }
+
+    public bool IsCanPlayNextRound
+    {
+        get {
+            return batteryState == PartState.Normal;
+        }
+    }
+
 
     // private properties
     Dictionary<BodyPart, PartState>  _bodyPartStates;
@@ -85,6 +99,13 @@ public class RobotDown : MonoBehaviour {
     }
 
     public void UpdateSprite () {
+
+        headState = _bodyPartStates[BodyPart.Head];
+        leftHandState = _bodyPartStates[BodyPart.LeftHand];
+        rightHandState = _bodyPartStates[BodyPart.RightHand];
+        leftLegState = _bodyPartStates[BodyPart.LeftLeg];
+        rightLegState = _bodyPartStates[BodyPart.RightLeg];
+        batteryState = _bodyPartStates[BodyPart.Battery];
 
         foreach (var partAndState in _bodyPartStates) {
             BodyPart  part  = partAndState.Key;
@@ -194,5 +215,51 @@ public class RobotDown : MonoBehaviour {
 
     public int[] GetStandByItem () {
         return tempItems.ToArray();
+    }
+
+    public bool[] GetEatable () {
+        
+        bool[] result = new bool[8] {
+            false, false, false, false, false, false, false, false
+        };
+
+        List<int> missingList = new List<int>( GetMissing() );
+        List<int> standbyList = new List<int>( GetStandByItem() );
+
+        // head
+        if (missingList.Contains(0)) {
+
+            if (!standbyList.Contains(0))
+                result[0] = true;
+
+            if (!standbyList.Contains(4))
+                result[4] = true;
+
+        }
+        // hand
+        if (missingList.Contains(1) || missingList.Contains(2)) {
+
+            if (!standbyList.Contains(1))
+                result[1] = true;
+            if (!standbyList.Contains(5))
+                result[5] = true;
+
+        }
+        // leg
+        if (missingList.Contains(3) || missingList.Contains(4)) {
+
+            if (!standbyList.Contains(2))
+                result[2] = true;
+            if (!standbyList.Contains(6))
+                result[6] = true;
+
+        }
+        // battery
+        if (missingList.Contains(5))  {
+
+            result[3] = true;
+        }
+
+        return result;
     }
 }
