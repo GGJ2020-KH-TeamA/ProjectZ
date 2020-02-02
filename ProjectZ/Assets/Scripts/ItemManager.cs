@@ -22,6 +22,7 @@ public class ItemManager : MonoBehaviour
     [Header("Spawn Setup")]
     public float itemSpanSpace = 2f;
     public ConveryorMover converyorMover;
+    public bool enableSpawn = false;
 
     private List<ItemController> itemControllers = new List<ItemController>();
 
@@ -42,23 +43,26 @@ public class ItemManager : MonoBehaviour
         bool isForward = converyorMover.speed > 0;
         bool isReverse = converyorMover.speed < 0;
 
-        if (isForward)
+        if (enableSpawn)
         {
-            float firstPosition = converyorMover.GetFirstPosition();
-            if (firstPosition >= itemSpanSpace || firstPosition < 0)
+            if (isForward)
             {
-                GameObject go = CreateItem();
-                converyorMover.PutItemAtBegin(go.transform);
+                float firstPosition = converyorMover.GetFirstPosition();
+                if (firstPosition >= itemSpanSpace || firstPosition < 0)
+                {
+                    GameObject go = CreateItem();
+                    converyorMover.PutItemAtBegin(go.transform);
+                }
             }
-        }
-        else if (isReverse)
-        {
-            float lastPosition = converyorMover.GetLastPosition();
-            float totalDistance = converyorMover.GetTotalDistance();
-            if (lastPosition <= totalDistance - itemSpanSpace || lastPosition < 0)
+            else if (isReverse)
             {
-                GameObject go = CreateItem();
-                converyorMover.PutItemAtEnd(go.transform);
+                float lastPosition = converyorMover.GetLastPosition();
+                float totalDistance = converyorMover.GetTotalDistance();
+                if (lastPosition <= totalDistance - itemSpanSpace || lastPosition < 0)
+                {
+                    GameObject go = CreateItem();
+                    converyorMover.PutItemAtEnd(go.transform);
+                }
             }
         }
 
@@ -128,5 +132,15 @@ public class ItemManager : MonoBehaviour
     public void PickItem(ItemController itemController)
     {
         RemoveItem(itemController);
+    }
+
+    public void RemoveAll()
+    {
+        for (int i = 0; i < itemControllers.Count; i++)
+        {
+            converyorMover.DetachItem(itemControllers[i].transform);
+            Destroy(itemControllers[i].gameObject);
+        }
+        itemControllers.Clear();
     }
 }
