@@ -7,6 +7,7 @@ public class Timer : MonoBehaviour
 {
     public float Maxtime = 20f;
     public float TimeLeft;
+    //public static bool active = false;
     
     public TimesUpEffect timesUpEffect;
     
@@ -17,7 +18,7 @@ public class Timer : MonoBehaviour
     
     void Update()
     {
-        if (TimeLeft > 0)
+        if (Main.active == 1 && TimeLeft > 0)
         {
             TimeLeft -= Time.deltaTime;
         }
