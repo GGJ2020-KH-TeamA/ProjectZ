@@ -17,7 +17,7 @@ public class PlayerControl : MonoBehaviour
     public int Item1 = 8;
     public int Item2 = 8;
     public bool isBlind = false;
-    private int HandCount = 0;
+    public int HandCount = 0;
     public bool isMoving { get; private set; }
     public Vector2 direction { get; private set; }
     public bool isPlaying = true;
@@ -55,20 +55,17 @@ public class PlayerControl : MonoBehaviour
 
     public void Init(bool[] parts)
     {
-        Speed = 3f;
+        Speed = 0.5f;
+        HandCount = 0;
+
         isBlind = parts[0];
         if (parts[1]) HandCount++;
         if (parts[2]) HandCount++;
         if (parts[3]) Speed += 1f;
         if (parts[4]) Speed += 1f;
-        if (!parts[5])
-        {
-            GameOverEvent();
-            isPlaying = false;
-        }
+        if (!parts[5]) isPlaying = false;
 
         playerSpriteController.SetPart(parts);
-        //GetComponent<PlayerRobot>().LoadLimbs(parts);
 
         MyStates = parts;
     }
@@ -101,7 +98,6 @@ public class PlayerControl : MonoBehaviour
         {
             if (isMoving)
             {
-                // RestEvent();
                 isMoving = false;
             }
             rigidbody.velocity = Vector2.zero;
@@ -110,10 +106,8 @@ public class PlayerControl : MonoBehaviour
         {
             if (!isMoving)
             {
-                // WalkEvent();
                 isMoving = true;
             }
-            //transform.position += GetMovement(movement) * Speed * Time.deltaTime;
             rigidbody.velocity = GetMovement(movement) * Speed;
         }
 
@@ -128,7 +122,7 @@ public class PlayerControl : MonoBehaviour
         return new Vector2(Mathf.Cos(angle * Mathf.Deg2Rad), Mathf.Sin(angle * Mathf.Deg2Rad));
     }
     
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerStay2D(Collider2D collision)
     {
         if (isPlaying)
         {
@@ -138,12 +132,12 @@ public class PlayerControl : MonoBehaviour
                 if (itemController)
                 {
                     ItemID = itemController.ID;
-                    if (Item1 == 8)
+                    if (Item1 == 8 && HandCount >= 1)
                     {
                         Item1 = ItemID;
                         itemManager.PickItem(itemController);
                     }
-                    else if (Item2 == 8)
+                    else if (Item2 == 8 && HandCount >= 2)
                     {
                         Item2 = ItemID;
                         itemManager.PickItem(itemController);
