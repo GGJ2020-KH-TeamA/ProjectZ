@@ -101,14 +101,27 @@ public class Main : MonoBehaviour
                     }
                     break;
                 }
+            case GameState.GameFail:
+                {
+                    if (roundClearTimer > 0)
+                    {
+                        roundClearTimer -= Time.deltaTime;
+                        if (roundClearTimer <= 0)
+                        {
+                            CameraEffect.Instance.oncolorfinish = BackToTitle;
+                            CameraEffect.Instance.MoveTo(new Vector2(0, -7.68f), 1f);
+                        }
+                    }
+                    break;
+                }
             default:
                 break;
         }
-        
-        //if (Input.GetKeyUp(KeyCode.T))
-        //{
-        //    CameraEffect.Instance.MoveTo(new Vector2(0, -7.68f), 1f);
-        //}
+    }
+
+    private void BackToTitle()
+    {
+        gameState = GameState.Title;
     }
 
     private void NextRoundPrepare()
@@ -152,7 +165,7 @@ public class Main : MonoBehaviour
         {
             playerControl.isPlaying = false;
             timer.StopTimer();
-            roundClearTimer = 3f;
+            roundClearTimer = 2f;
             gameState = GameState.GameRoundClear;
             
             return;
@@ -165,11 +178,12 @@ public class Main : MonoBehaviour
 
             if (robotDown.IsCanPlayNextRound)
             {
-                roundClearTimer = 3f;
+                roundClearTimer = 2f;
                 gameState = GameState.GameRoundClear;
             }
             else
             {
+                roundClearTimer = 2f;
                 gameState = GameState.GameFail;
             }
             return;

@@ -20,7 +20,7 @@ public class PlayerSpriteController : MonoBehaviour
 
     public void SetPart(bool[] parts)
     {
-        for (int i = 0; i < Mathf.Min(parts.Length, spriteSheetManagers.Length); i++)
+        for (int i = 1; i < Mathf.Min(parts.Length, spriteSheetManagers.Length); i++)
         {
             spriteSheetManagers[i].gameObject.SetActive(parts[i]);
         }
