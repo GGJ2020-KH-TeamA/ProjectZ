@@ -6,7 +6,7 @@ public class PlayerControl : MonoBehaviour
 {
     public static PlayerControl Instance { get; private set; }
 
-    public GameObject[] Robots;
+    public ItemManager itemManager;
     private GameObject RobotDown;
 
     private bool[] MyStates;
@@ -133,12 +133,12 @@ public class PlayerControl : MonoBehaviour
                     if (Item1 == 8)
                     {
                         Item1 = ItemID;
-                        ItemManager.Instance.PickItem(itemController);
+                        itemManager.PickItem(itemController);
                     }
                     else if (Item2 == 8)
                     {
                         Item2 = ItemID;
-                        ItemManager.Instance.PickItem(itemController);
+                        itemManager.PickItem(itemController);
                     }
                 }
             }

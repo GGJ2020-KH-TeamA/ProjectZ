@@ -3262,6 +3262,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameState: 0
+  itemManager: {fileID: 1230575634}
 --- !u!4 &850159980
 Transform:
   m_ObjectHideFlags: 0
@@ -5566,7 +5567,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 57b54153a861921489f0537753e0048b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Robots: []
+  itemManager: {fileID: 1230575634}
   ItemID: 0
   Item1: 8
   Item2: 8
