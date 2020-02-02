@@ -43,11 +43,6 @@ public class PlayerControl : MonoBehaviour
 
         Remain();
         
-        if (transform.position.x > 2.13f) transform.position = new Vector3(2.13f, transform.position.y, 0);
-        if (transform.position.x < -2.27f) transform.position = new Vector3(-2.27f, transform.position.y, 0);
-        if (transform.position.y > 1.55f) transform.position = new Vector3(transform.position.x, 1.55f, 0);
-        if (transform.position.y < -1.56f) transform.position = new Vector3(transform.position.x, -1.56f, 0);
-
         Vector3 tmpPosition = RobotDown.transform.position;
         RobotDown.transform.position = transform.position;
         transform.position = tmpPosition;
