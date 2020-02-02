@@ -128,8 +128,13 @@ public class Main : MonoBehaviour
     private void NextRoundPrepare()
     {
         gameRound++;
+        ;
+        Vector3 tmpPosition = playerControl.transform.position;
+        tmpPosition.x = Mathf.Clamp(tmpPosition.x, -2.27f, 2.13f);
+        tmpPosition.y = Mathf.Clamp(tmpPosition.y, -1.55f, -1.56f);
+        playerControl.transform.position = tmpPosition;
 
-        Vector3 tmpPosition = robotDown.transform.position;
+        tmpPosition = robotDown.transform.position;
         robotDown.transform.position = playerControl.transform.position;
         playerControl.transform.position = tmpPosition;
 

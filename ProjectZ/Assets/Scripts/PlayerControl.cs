@@ -10,6 +10,7 @@ public class PlayerControl : MonoBehaviour
     public ItemManager itemManager;
     public PlayerSpriteController playerSpriteController;
     private GameObject RobotDown;
+    public Main _Main;
 
     public bool[] MyStates;
 
@@ -22,7 +23,7 @@ public class PlayerControl : MonoBehaviour
     public bool isMoving { get; private set; }
     public Vector2 direction { get; private set; }
     public bool isPlaying = true;
-    private int BreakProbability = 50;
+    private int BreakProbability;
 
     private Rigidbody2D rigidbody;
 
@@ -41,6 +42,11 @@ public class PlayerControl : MonoBehaviour
         RobotDown = GameObject.FindGameObjectWithTag("RobotDown");
 
         Remain();
+        
+        if (transform.position.x > 2.13f) transform.position = new Vector3(2.13f, transform.position.y, 0);
+        if (transform.position.x < -2.27f) transform.position = new Vector3(-2.27f, transform.position.y, 0);
+        if (transform.position.y > 1.55f) transform.position = new Vector3(transform.position.x, 1.55f, 0);
+        if (transform.position.y < -1.56f) transform.position = new Vector3(transform.position.x, -1.56f, 0);
 
         Vector3 tmpPosition = RobotDown.transform.position;
         RobotDown.transform.position = transform.position;
@@ -73,7 +79,7 @@ public class PlayerControl : MonoBehaviour
 
     public bool[] Remain()
     {
-        //BreakProbability = 5 * 關卡數;
+        BreakProbability = 5 * _Main.gameRound;
         for(int i = 0; i < MyStates.Length; i++)
         {
             if (MyStates[i] && Random.Range(0, 100) < BreakProbability) MyStates[i] = false;
