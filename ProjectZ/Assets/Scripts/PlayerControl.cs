@@ -89,12 +89,13 @@ public class PlayerControl : MonoBehaviour
     {
         Vector2 movement = Vector2.zero;
 
-        if (!isPlaying) return;
-
-        if (Input.GetKey(KeyCode.W)) movement += Vector2.up;
-        if (Input.GetKey(KeyCode.A)) movement += Vector2.left;
-        if (Input.GetKey(KeyCode.S)) movement += Vector2.down;
-        if (Input.GetKey(KeyCode.D)) movement += Vector2.right;
+        if (isPlaying)
+        {
+            if (Input.GetKey(KeyCode.W)) movement += Vector2.up;
+            if (Input.GetKey(KeyCode.A)) movement += Vector2.left;
+            if (Input.GetKey(KeyCode.S)) movement += Vector2.down;
+            if (Input.GetKey(KeyCode.D)) movement += Vector2.right;
+        }
         
         if(movement == Vector2.zero)
         {
