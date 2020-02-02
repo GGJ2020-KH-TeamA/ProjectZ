@@ -24,7 +24,10 @@ public class TimesUpEffect : MonoBehaviour
 
     public void PlayEffect()
     {
+        CameraEffect.Instance.FadeOut(1f);
         playerControl.isPlaying = false;
+        playerControl.RoundEnd();
         playerControl.isPlaying = true;
+        CameraEffect.Instance.FadeIn(1f);
     }
 }

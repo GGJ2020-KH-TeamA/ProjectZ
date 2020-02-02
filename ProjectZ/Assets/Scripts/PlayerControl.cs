@@ -26,12 +26,19 @@ public class PlayerControl : MonoBehaviour
 
     public delegate void PlayerDelegate();
     public static PlayerDelegate GameOverEvent;
-    public static PlayerDelegate WalkEvent;
-    public static PlayerDelegate RestEvent;
 
-    private void RoundEnd()
+    void Awake()
+    {
+        Instance = this;
+        rigidbody = GetComponent<Rigidbody2D>();
+        MyStates = new bool[] { true, true, true, true, true, true };
+    }
+
+    public void RoundEnd()
     {
         RobotDown = GameObject.FindGameObjectWithTag("RobotDown");
+
+        Remain();
 
         Vector3 tmpPosition = RobotDown.transform.position;
         RobotDown.transform.position = transform.position;
@@ -40,9 +47,11 @@ public class PlayerControl : MonoBehaviour
         bool[] tmpState = RobotDown.GetComponent<RobotDown>().GetStateData();
         RobotDown.GetComponent<RobotDown>().Init(MyStates);
         MyStates = tmpState;
+
+        Init(MyStates);
     }
 
-    private void Init(bool[] RobotDown)
+    public void Init(bool[] RobotDown)
     {
         isBlind = RobotDown[0];
         if (RobotDown[1]) HandCount++;
@@ -65,16 +74,9 @@ public class PlayerControl : MonoBehaviour
         {
             if (MyStates[i] && Random.Range(0, 100) < BreakProbability) MyStates[i] = false;
         }
-
         return MyStates;
     }
-
-    void Awake()
-    {
-        Instance = this;
-        rigidbody = GetComponent<Rigidbody2D>();
-    }
-
+    
     void Update()
     {
         if(isPlaying) Walk();
