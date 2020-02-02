@@ -129,6 +129,8 @@ public class Main : MonoBehaviour
 
         converyorMover.speed = 2;
 
+        Debug.Log(gameRound + " Round");
+
         CameraEffect.Instance.oncolorfinish = GoNextRound;
         CameraEffect.Instance.FadeIn(1f);
     }
@@ -159,7 +161,16 @@ public class Main : MonoBehaviour
         if (!timer.active)
         {
             playerControl.isPlaying = false;
-            gameState = GameState.GameFail;
+
+            if (robotDown.IsCanPlayNextRound)
+            {
+                roundClearTimer = 3f;
+                gameState = GameState.GameRoundClear;
+            }
+            else
+            {
+                gameState = GameState.GameFail;
+            }
             return;
         }
     }
@@ -176,6 +187,8 @@ public class Main : MonoBehaviour
         timer.StartTimer();
 
         converyorMover.speed = 2;
+
+        Debug.Log("First Round");
     }
 
    
