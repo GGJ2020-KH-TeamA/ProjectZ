@@ -27,16 +27,19 @@ public class PobotDownNeedDialog : MonoBehaviour
 
     private void ReflashSprite()
     {
-        for (int i = 0; i < 8; i++)
-        {
-            if (NeedItem[i]) MaxCount++;
-        }
-
         if (Timer >= 1)
         {
-            Count++;
+            
+            for (int i = Count; i != Count; i=(i+1)%8)
+            {
+                if (NeedItem[i])
+                {
+                    Need1Sprite = sprites[i];
+                    Count = i + 1;
+                    break;
+                }
+            }
             Timer = 0;
-            Need1Sprite = sprites[Count % MaxCount];
         }
         
     }
