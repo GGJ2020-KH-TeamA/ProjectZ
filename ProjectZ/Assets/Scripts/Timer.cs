@@ -7,30 +7,26 @@ public class Timer : MonoBehaviour
 {
     Image TimerBar;
     public float Maxtime = 5f;
-    float TImeLeft;
+    float TimeLeft;
     
-
-
-    // Start is called before the first frame update
+    public TimesUpEffect timesUpEffect;
+    
     void Start()
     {
         TimerBar = GetComponent<Image>();
-        TImeLeft = Maxtime;
+        TimeLeft = Maxtime;
     }
-
-    // Update is called once per frame
+    
     void Update()
     {
-        if (TImeLeft > 0)
+        if (TimeLeft > 0)
         {
-            TImeLeft -= Time.deltaTime;
-            TimerBar.fillAmount = TImeLeft / Maxtime;
+            TimeLeft -= Time.deltaTime;
+            TimerBar.fillAmount = TimeLeft / Maxtime;
         }
-
         else
         {
-            Time.timeScale = 0;
+            timesUpEffect.PlayEffect();
         }
-  
     }
 }

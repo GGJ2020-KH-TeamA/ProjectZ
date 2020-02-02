@@ -19,7 +19,7 @@ public class PlayerControl : MonoBehaviour
     private int HandCount = 0;
     public bool isMoving { get; private set; }
     public Vector2 direction { get; private set; }
-    private bool isPlaying = true;
+    public bool isPlaying = true;
     private int BreakProbability = 50;
 
     private Rigidbody2D rigidbody;
@@ -36,6 +36,10 @@ public class PlayerControl : MonoBehaviour
         Vector3 tmpPosition = RobotDown.transform.position;
         RobotDown.transform.position = transform.position;
         transform.position = tmpPosition;
+
+        bool[] tmpState = RobotDown.GetComponent<RobotDown>().GetStateData();
+        RobotDown.GetComponent<RobotDown>().Init(MyStates);
+        MyStates = tmpState;
     }
 
     private void Init(bool[] RobotDown)
