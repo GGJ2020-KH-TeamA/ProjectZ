@@ -6,6 +6,7 @@ public class PlayerControl : MonoBehaviour
 {
     public static PlayerControl Instance { get; private set; }
 
+    public AudioManager audioManager;
     public ItemManager itemManager;
     public PlayerSpriteController playerSpriteController;
     private GameObject RobotDown;
@@ -79,12 +80,12 @@ public class PlayerControl : MonoBehaviour
         }
         return MyStates;
     }
-    
+
     void Update()
     {
         Walk();
     }
-    
+
     private void Walk()
     {
         Vector2 movement = Vector2.zero;
@@ -96,12 +97,13 @@ public class PlayerControl : MonoBehaviour
             if (Input.GetKey(KeyCode.S)) movement += Vector2.down;
             if (Input.GetKey(KeyCode.D)) movement += Vector2.right;
         }
-        
+
         if(movement == Vector2.zero)
         {
             if (isMoving)
             {
                 isMoving = false;
+                audioManager.Pause("walk");
             }
             rigidbody.velocity = Vector2.zero;
         }
@@ -110,11 +112,12 @@ public class PlayerControl : MonoBehaviour
             if (!isMoving)
             {
                 isMoving = true;
+                audioManager.Play("walk", true);
             }
             rigidbody.velocity = GetMovement(movement) * Speed;
         }
 
-        
+
 
         direction = movement;
     }
@@ -124,7 +127,7 @@ public class PlayerControl : MonoBehaviour
         float angle = Vector2.SignedAngle(Vector2.right, dir);
         return new Vector2(Mathf.Cos(angle * Mathf.Deg2Rad), Mathf.Sin(angle * Mathf.Deg2Rad));
     }
-    
+
     private void OnTriggerStay2D(Collider2D collision)
     {
         if (isPlaying)
@@ -139,11 +142,13 @@ public class PlayerControl : MonoBehaviour
                     {
                         Item1 = ItemID;
                         itemManager.PickItem(itemController);
+                        audioManager.Play("pick");
                     }
                     else if (Item2 == 8 && HandCount >= 2)
                     {
                         Item2 = ItemID;
                         itemManager.PickItem(itemController);
+                        audioManager.Play("pick");
                     }
                 }
             }
@@ -152,19 +157,26 @@ public class PlayerControl : MonoBehaviour
             {
                 Item1 = 8;
                 Item2 = 8;
+                audioManager.Player("trash");
             }
 
             if (collision.tag == "RobotDown")
             {
+                bool gived = false;
                 if (collision.GetComponent<RobotDown>().InterActByPlayer(Item1))
                 {
                     Item1 = Item2;
                     Item2 = 8;
+                    gived = true;
                 }
                 if (collision.GetComponent<RobotDown>().InterActByPlayer(Item2))
                 {
                     Item2 = 8;
+                    gived = true;
                 }
+
+                if (gived)
+                    audioManager.Play("give");
             }
         }
     }
