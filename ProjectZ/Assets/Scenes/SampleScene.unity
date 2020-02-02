@@ -3363,6 +3363,7 @@ MonoBehaviour:
   gameRound: 0
   itemManager: {fileID: 1230575634}
   playerControl: {fileID: 1307156839}
+  timer: {fileID: 1256515026}
 --- !u!4 &850159980
 Transform:
   m_ObjectHideFlags: 0

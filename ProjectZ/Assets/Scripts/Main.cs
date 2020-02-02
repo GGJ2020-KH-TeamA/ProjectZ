@@ -24,12 +24,16 @@ public class Main : MonoBehaviour
     [Header("Game Managers")]
     public ItemManager itemManager;
     public PlayerControl playerControl;
+    public RobotDown robotDown;
+    public Timer timer;
 
     // Start is called before the first frame update
     void Start()
     {
         playerControl.isPlaying = false;
         defaultPlayerPosition = playerControl.transform.position;
+
+        timer.Reset();
 
         CameraEffect.Instance.MoveTo(new Vector2(0, 0), 0f);
         CameraEffect.Instance.oncolorfinish = ReadyToTitle;
@@ -55,6 +59,8 @@ public class Main : MonoBehaviour
 
                         gameRound = 0;
 
+                        timer.Reset();
+
                         playerControl.isPlaying = false;
                         playerControl.Init(new bool[] { true, true, true, true, true, true });
                         playerControl.transform.position = defaultPlayerPosition;
@@ -67,8 +73,7 @@ public class Main : MonoBehaviour
                 }
             case GameState.GamePrepare:
                 {
-                    
-                    
+                    gameState = GameState.Gaming;
                     break;
                 }
             default:
@@ -88,6 +93,9 @@ public class Main : MonoBehaviour
 
         playerControl.isPlaying = true;
         itemManager.enableSpawn = true;
+
+        timer.Reset();
+        timer.StartTimer();
     }
 
    

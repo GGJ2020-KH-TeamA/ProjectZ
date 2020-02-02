@@ -17,12 +17,12 @@ public class Timer : MonoBehaviour
         TimeLeft = Maxtime;
     }
 
-    public void Start()
+    public void StartTimer()
     {
         active = true;
     }
 
-    public void Stop()
+    public void StopTimer()
     {
         active = false;
     }
