@@ -218,7 +218,7 @@ public class RobotDown : MonoBehaviour {
     }
 
     public bool[] GetEatable () {
-        
+
         bool[] result = new bool[8] {
             false, false, false, false, false, false, false, false
         };
@@ -232,7 +232,7 @@ public class RobotDown : MonoBehaviour {
             if (!standbyList.Contains(0))
                 result[0] = true;
 
-            if (!standbyList.Contains(4))
+            if (!standbyList.Contains(4) && !standbyList.Contains(7))
                 result[4] = true;
 
         }
@@ -241,7 +241,7 @@ public class RobotDown : MonoBehaviour {
 
             if (!standbyList.Contains(1))
                 result[1] = true;
-            if (!standbyList.Contains(5))
+            if (!standbyList.Contains(5) && !standbyList.Contains(7))
                 result[5] = true;
 
         }
@@ -250,7 +250,7 @@ public class RobotDown : MonoBehaviour {
 
             if (!standbyList.Contains(2))
                 result[2] = true;
-            if (!standbyList.Contains(6))
+            if (!standbyList.Contains(6) && !standbyList.Contains(7))
                 result[6] = true;
 
         }
