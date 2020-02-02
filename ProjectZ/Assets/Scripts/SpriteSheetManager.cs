@@ -28,10 +28,10 @@ public class SpriteSheetManager : MonoBehaviour {
 
         if (_isAnimPlaying) {
 
-            if (Time.realtimeSinceStartup - _prevSpriteTime > _nowInterval) {
+            if (Time.timeSinceLevelLoad - _prevSpriteTime > _nowInterval) {
 
                 _nowSpritesIndex = (_nowSpritesIndex + 1) % _nowSprites.Length;
-                _prevSpriteTime  = Time.realtimeSinceStartup;
+                _prevSpriteTime  = Time.timeSinceLevelLoad;
 
                 _spriteRenderer.sprite = _nowSprites[_nowSpritesIndex];
             }
@@ -56,7 +56,7 @@ public class SpriteSheetManager : MonoBehaviour {
 
     public void PlayAnim (string animName, float interval) {
 
-        
+
     }
 
     public void SetAnimFrame(int index)
@@ -85,5 +85,5 @@ public class SpriteSheetManager : MonoBehaviour {
         _isAnimPlaying = false;
     }
 
-    
+
 }
