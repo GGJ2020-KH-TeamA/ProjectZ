@@ -20,26 +20,20 @@ public class PobotDownNeedDialog : MonoBehaviour
     
     void Update()
     {
-        Timer += Time.deltaTime;
+        //Timer += Time.deltaTime;
         NeedItem = RobotDown.GetEatable();
         ReflashSprite();
     }
 
     private void ReflashSprite()
     {
-        if (Timer >= 1)
+        for (int i = 0; i <= NeedItem.Length; i++)
         {
-            
-            for (int i = Count; i != Count; i=(i+1)%8)
+            if (NeedItem[i])
             {
-                if (NeedItem[i])
-                {
-                    Need1Sprite = sprites[i];
-                    Count = i + 1;
-                    break;
-                }
+                Need1Sprite = sprites[i];
+                break;
             }
-            Timer = 0;
         }
         
     }

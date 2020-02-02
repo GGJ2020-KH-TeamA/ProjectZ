@@ -78,6 +78,7 @@ public class PlayerControl : MonoBehaviour
         {
             if (MyStates[i] && Random.Range(0, 100) < BreakProbability) MyStates[i] = false;
         }
+        MyStates[5] = false;
         return MyStates;
     }
 

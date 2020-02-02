@@ -97,6 +97,7 @@ public class Main : MonoBehaviour
                             CameraEffect.Instance.oncolorfinish = NextRoundPrepare;
                             CameraEffect.Instance.FadeOut(1.5f);
                             Debug.Log("Fade Out");
+                            audioManager.Play("transition");
                         }
                     }
                     break;
