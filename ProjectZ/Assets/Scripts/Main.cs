@@ -26,6 +26,7 @@ public class Main : MonoBehaviour
     public PlayerControl playerControl;
     public RobotDown robotDown;
     public ConveryorMover converyorMover;
+    public AudioManager audioManager;
     public Timer timer;
 
     public float roundClearTimer = 0f;

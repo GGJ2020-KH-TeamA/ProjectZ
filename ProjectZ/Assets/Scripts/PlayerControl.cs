@@ -56,7 +56,7 @@ public class PlayerControl : MonoBehaviour
 
     public void Init(bool[] parts)
     {
-        Speed = 0.5f;
+        Speed = 3f;
         HandCount = 0;
 
         isBlind = parts[0];
@@ -157,7 +157,7 @@ public class PlayerControl : MonoBehaviour
             {
                 Item1 = 8;
                 Item2 = 8;
-                audioManager.Player("trash");
+                audioManager.Play("trash");
             }
 
             if (collision.tag == "RobotDown")
