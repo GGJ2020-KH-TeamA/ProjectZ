@@ -159,21 +159,21 @@ public class PlayerControl : MonoBehaviour
 
             if (collision.tag == "TrashCan")
             {
+                if(Item1 != 8 || Item2 != 8) audioManager.Play("trash");
                 Item1 = 8;
                 Item2 = 8;
-                audioManager.Play("trash");
             }
 
             if (collision.tag == "RobotDown")
             {
                 bool gived = false;
-                if (collision.GetComponent<RobotDown>().InterActByPlayer(Item1))
+                if (collision.GetComponentInParent<RobotDown>().InterActByPlayer(Item1))
                 {
                     Item1 = Item2;
                     Item2 = 8;
                     gived = true;
                 }
-                if (collision.GetComponent<RobotDown>().InterActByPlayer(Item2))
+                if (collision.GetComponentInParent<RobotDown>().InterActByPlayer(Item2))
                 {
                     Item2 = 8;
                     gived = true;

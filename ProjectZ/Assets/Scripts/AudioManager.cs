@@ -31,17 +31,7 @@ public class AudioManager : MonoBehaviour
             {"transition", transitionAudio}
         };
     }
-
-    // void Update () {
-    //
-    //     if (!_isTransitionStarted && transitionAudio.isPlaying)
-    //         _isTransitionStarted = true;
-    //
-    //     if (_isTransitionStarted && !transitionAudio.isPlaying) {
-    //         // transition end
-    //     }
-    // }
-
+    
     public void Play (string name, bool loop = false) {
         _sources[name].loop = loop;
         _sources[name].Play();

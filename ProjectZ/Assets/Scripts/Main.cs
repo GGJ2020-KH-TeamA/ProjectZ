@@ -41,7 +41,7 @@ public class Main : MonoBehaviour
 
         CameraEffect.Instance.MoveTo(new Vector2(0, 0), 0f);
         CameraEffect.Instance.oncolorfinish = ReadyToTitle;
-        CameraEffect.Instance.FadeIn(1f);
+        CameraEffect.Instance.FadeIn(1f, 1f);
     }
 
     private void ReadyToTitle()
@@ -95,7 +95,7 @@ public class Main : MonoBehaviour
                         if (roundClearTimer <= 0)
                         {
                             CameraEffect.Instance.oncolorfinish = NextRoundPrepare;
-                            CameraEffect.Instance.FadeOut(1.5f);
+                            CameraEffect.Instance.FadeOut(0.5f, 2.5f);
                             Debug.Log("Fade Out");
                             audioManager.Play("transition");
                         }
@@ -152,7 +152,7 @@ public class Main : MonoBehaviour
         Debug.Log(gameRound + " Round");
 
         CameraEffect.Instance.oncolorfinish = GoNextRound;
-        CameraEffect.Instance.FadeIn(1f);
+        CameraEffect.Instance.FadeIn(0.5f, 2.5f);
     }
 
     private void GoNextRound()
@@ -171,7 +171,7 @@ public class Main : MonoBehaviour
         {
             playerControl.isPlaying = false;
             timer.StopTimer();
-            roundClearTimer = 2f;
+            roundClearTimer = 1f;
             gameState = GameState.GameRoundClear;
             
             return;
@@ -184,12 +184,12 @@ public class Main : MonoBehaviour
 
             if (robotDown.IsCanPlayNextRound)
             {
-                roundClearTimer = 2f;
+                roundClearTimer = 1f;
                 gameState = GameState.GameRoundClear;
             }
             else
             {
-                roundClearTimer = 2f;
+                roundClearTimer = 1f;
                 gameState = GameState.GameFail;
             }
             return;

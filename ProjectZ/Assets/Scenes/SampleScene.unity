@@ -435,7 +435,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: a79512d441de4704c9d8fcba11899518, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.8
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -562,7 +562,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: cd8bbb5e710278445bbc81f0e3e0013f, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0.34
+  m_Volume: 0.27
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -1786,7 +1786,7 @@ GameObject:
   - component: {fileID: 284097971}
   m_Layer: 0
   m_Name: RobotDownRF
-  m_TagString: Untagged
+  m_TagString: RobotDown
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1998,7 +1998,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 4
+  m_SortingOrder: 70
   m_Sprite: {fileID: 7230738291634701634, guid: f94525ca203ed4e7cbe25767aa2a5c84,
     type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -2161,7 +2161,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 46062d2592cc2eb448b43a71afe48191, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.8
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -2303,7 +2303,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: -0.102202415}
@@ -2690,7 +2690,7 @@ GameObject:
   - component: {fileID: 451244535}
   m_Layer: 0
   m_Name: RobotDownLH
-  m_TagString: Untagged
+  m_TagString: RobotDown
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3401,7 +3401,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 5fbce4c3d0d4b9a4c9f0bf11b49fff14, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.8
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -3995,7 +3995,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 84159caa6bc862f4fbfc53963fa86a17, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.8
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -5060,7 +5060,7 @@ GameObject:
   - component: {fileID: 927460557}
   m_Layer: 0
   m_Name: RobotDownHead
-  m_TagString: Untagged
+  m_TagString: RobotDown
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5531,7 +5531,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 3
   m_Sprite: {fileID: 21300000, guid: e60e6387eb1b34b0398c7aa811d4e82e, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.7294118}
+  m_Color: {r: 0.68235296, g: 0.68235296, b: 0.68235296, a: 0.7294118}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -6861,7 +6861,7 @@ GameObject:
   - component: {fileID: 1195777597}
   m_Layer: 0
   m_Name: RobotDownBody
-  m_TagString: Untagged
+  m_TagString: RobotDown
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -7016,7 +7016,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 4
+  m_SortingOrder: 60
   m_Sprite: {fileID: 2381739445493513416, guid: f94525ca203ed4e7cbe25767aa2a5c84,
     type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -8263,7 +8263,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 4
+  m_SortingOrder: 60
   m_Sprite: {fileID: 7587033490011023399, guid: f94525ca203ed4e7cbe25767aa2a5c84,
     type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -9329,7 +9329,7 @@ GameObject:
   - component: {fileID: 1861871354}
   m_Layer: 0
   m_Name: RobotDownLF
-  m_TagString: Untagged
+  m_TagString: RobotDown
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -9608,7 +9608,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 4
+  m_SortingOrder: 50
   m_Sprite: {fileID: 3033208558047046832, guid: f94525ca203ed4e7cbe25767aa2a5c84,
     type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -9955,7 +9955,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 4
+  m_SortingOrder: 70
   m_Sprite: {fileID: 6049323844985040755, guid: f94525ca203ed4e7cbe25767aa2a5c84,
     type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -10258,7 +10258,7 @@ GameObject:
   - component: {fileID: 2038820450}
   m_Layer: 0
   m_Name: RobotDownRH
-  m_TagString: Untagged
+  m_TagString: RobotDown
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

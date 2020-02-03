@@ -16,6 +16,8 @@ public class CameraEffect : MonoBehaviour
 
     private float timer;
     private float duration;
+    private float totaltimer;
+    private bool isFadeIn;
 
     public System.Action onposfinish;
     private Vector2 frompos;
@@ -42,12 +44,21 @@ public class CameraEffect : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (timer < duration)
+        if (timer < totaltimer)
         {
             timer += Time.deltaTime;
-            float progress = Mathf.Clamp01(timer / duration);
-            fadeSprite.color = Color.Lerp(from, to, progress);
-            if (progress >= 1)
+            if (isFadeIn)
+            {
+                float progress = Mathf.Clamp01((timer + duration - totaltimer) / duration);
+                fadeSprite.color = Color.Lerp(from, to, progress);
+            }
+            else
+            {
+                float progress = Mathf.Clamp01(timer / duration);
+                fadeSprite.color = Color.Lerp(from, to, progress);
+            }
+            
+            if (timer >= totaltimer)
             {
                 if (oncolorfinish != null) oncolorfinish();
             }
@@ -66,17 +77,21 @@ public class CameraEffect : MonoBehaviour
         }
     }
 
-    public void FadeIn(float time)
+    public void FadeIn(float time , float totaltime)
     {
+        isFadeIn = true;
         timer = 0;
+        totaltimer = totaltime;
         duration = time;
         from = fadeSprite.color;
         to = Color.clear;
     }
 
-    public void FadeOut(float time)
+    public void FadeOut(float time, float totaltime)
     {
+        isFadeIn = false;
         timer = 0;
+        totaltimer = totaltime;
         duration = time;
         from = fadeSprite.color;
         to = Color.black;
