@@ -9,8 +9,6 @@ public class Timer : MonoBehaviour
     public float TimeLeft;
 
     public bool active = false;
-
-    public TimesUpEffect timesUpEffect;
     
     public void Reset()
     {

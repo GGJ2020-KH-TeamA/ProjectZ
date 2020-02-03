@@ -1026,7 +1026,7 @@ MonoBehaviour:
     itemType: 7
     probability: 5
     sprite: {fileID: 21300000, guid: cbfa39ea440af4c978737e6a9e5746d3, type: 3}
-  itemSpanSpace: 2.5
+  itemSpanSpace: 2
   converyorMover: {fileID: 987911076}
   enableSpawn: 1
 --- !u!1 &117736969
@@ -5669,7 +5669,7 @@ MonoBehaviour:
   path: {fileID: 482103552}
   slidePrefab: {fileID: 990246126}
   space: 0.5
-  speed: 0.75
+  speed: 2
 --- !u!1 &990246126
 GameObject:
   m_ObjectHideFlags: 0
@@ -7117,7 +7117,7 @@ MonoBehaviour:
     itemType: 7
     probability: 5
     sprite: {fileID: 21300000, guid: cbfa39ea440af4c978737e6a9e5746d3, type: 3}
-  itemSpanSpace: 1.5
+  itemSpanSpace: 2
   converyorMover: {fileID: 440033444}
   enableSpawn: 1
 --- !u!4 &1230575635
@@ -7209,10 +7209,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25545bc68832860499384b534b483045, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Maxtime: 20
+  Maxtime: 30
   TimeLeft: 0
   active: 0
-  timesUpEffect: {fileID: 0}
 --- !u!1 &1285009066
 GameObject:
   m_ObjectHideFlags: 0
@@ -9694,7 +9693,7 @@ MonoBehaviour:
   path: {fileID: 2131535665}
   slidePrefab: {fileID: 682276989}
   space: 0.5
-  speed: 1.2
+  speed: 2
 --- !u!1 &1901573891
 GameObject:
   m_ObjectHideFlags: 0
