@@ -109,7 +109,7 @@ public class Main : MonoBehaviour
                         roundClearTimer -= Time.deltaTime;
                         if (roundClearTimer <= 0)
                         {
-                            CameraEffect.Instance.oncolorfinish = BackToTitle;
+                            CameraEffect.Instance.onposfinish = BackToTitle;
                             CameraEffect.Instance.MoveTo(new Vector2(0, -7.68f), 1f);
                         }
                     }
@@ -212,6 +212,4 @@ public class Main : MonoBehaviour
         Debug.Log("First Round");
         gotoPlay = false;
     }
-
-   
 }
