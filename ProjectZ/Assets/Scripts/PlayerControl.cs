@@ -57,7 +57,9 @@ public class PlayerControl : MonoBehaviour
 
     public void Init(bool[] parts)
     {
-        Speed = 3f;
+        Item1 = 8;
+        Item2 = 8; 
+        Speed = 1f;
         HandCount = 0;
 
         isBlind = parts[0];

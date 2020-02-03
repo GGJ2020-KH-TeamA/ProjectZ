@@ -37,11 +37,6 @@ public class Timer : MonoBehaviour
                 TimeLeft = 0;
                 active = false;
             }
-            
-        }
-        else
-        {
-            //timesUpEffect.PlayEffect();
         }
     }
 }

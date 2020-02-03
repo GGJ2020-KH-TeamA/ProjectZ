@@ -6,13 +6,13 @@ using UnityEngine;
 public class Main : MonoBehaviour
 {
     public static int active = 0;
+    private bool gotoPlay = false;
 
     public GameState gameState = GameState.Init;
     public enum GameState
     {
         Init,
         Title,
-        TitleToGame,
         GamePrepare,
         Gaming,
         GameRoundClear,
@@ -56,7 +56,7 @@ public class Main : MonoBehaviour
         {
             case GameState.Title:
                 {
-                    if (Input.anyKey)
+                    if (Input.anyKey && !gotoPlay)
                     {
                         itemManager.enableSpawn = false;
                         itemManager.RemoveAll();
@@ -69,9 +69,9 @@ public class Main : MonoBehaviour
                         playerControl.Init(new bool[] { true, true, true, true, true, true });
                         playerControl.transform.position = defaultPlayerPosition;
 
-                        robotDown.Init(new bool[] { true, false, true, true, true, true });
+                        robotDown.Init(new bool[] { true, false, true, true, true, false });
 
-                        gameState = GameState.TitleToGame;
+                        gotoPlay = true;
                         CameraEffect.Instance.onposfinish = ReadyToGame;
                         CameraEffect.Instance.MoveTo(new Vector2(0, 0), 1f);
                     }
@@ -128,7 +128,7 @@ public class Main : MonoBehaviour
     private void NextRoundPrepare()
     {
         gameRound++;
-        ;
+
         Vector3 tmpPosition = playerControl.transform.position;
         tmpPosition.x = Mathf.Clamp(tmpPosition.x, -2.27f, 2.13f);
         tmpPosition.y = Mathf.Clamp(tmpPosition.y, -1.55f, -1.56f);
@@ -210,6 +210,7 @@ public class Main : MonoBehaviour
         converyorMover.speed = 2;
 
         Debug.Log("First Round");
+        gotoPlay = false;
     }
 
    
