@@ -71,7 +71,7 @@ public class Main : MonoBehaviour
                         robotDown.transform.position = new Vector2(0, 0);
                         playerControl.transform.position = defaultPlayerPosition;
 
-                        robotDown.Init(new bool[] { false, false, true, true, true, false });
+                        robotDown.Init(new bool[] { true, true, true, true, true, false });
 
                         gotoPlay = true;
                         CameraEffect.Instance.onposfinish = ReadyToGame;
