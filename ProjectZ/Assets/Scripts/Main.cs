@@ -36,6 +36,7 @@ public class Main : MonoBehaviour
     {
         playerControl.isPlaying = false;
         defaultPlayerPosition = playerControl.transform.position;
+        robotDown.transform.position = new Vector2(0, 0);
 
         timer.Reset();
 
@@ -67,9 +68,10 @@ public class Main : MonoBehaviour
 
                         playerControl.isPlaying = false;
                         playerControl.Init(new bool[] { true, true, true, true, true, true });
+                        robotDown.transform.position = new Vector2(0, 0);
                         playerControl.transform.position = defaultPlayerPosition;
 
-                        robotDown.Init(new bool[] { true, false, true, true, true, false });
+                        robotDown.Init(new bool[] { false, false, true, true, true, false });
 
                         gotoPlay = true;
                         CameraEffect.Instance.onposfinish = ReadyToGame;
@@ -122,6 +124,8 @@ public class Main : MonoBehaviour
 
     private void BackToTitle()
     {
+        playerControl.isBlind = false;
+        playerControl.CheckBlind();
         gameState = GameState.Title;
     }
 
@@ -143,6 +147,7 @@ public class Main : MonoBehaviour
         bool[] tmpState = robotDown.GetStateData();
         robotDown.Init(playerControl.MyStates);
         playerControl.Init(tmpState);
+        playerControl.CheckBlind();
 
         timer.Reset();
         itemManager.enableSpawn = true;

@@ -11,6 +11,7 @@ public class PlayerControl : MonoBehaviour
     public PlayerSpriteController playerSpriteController;
     private GameObject RobotDown;
     public Main _Main;
+    public GameObject BlindEffect;
 
     public bool[] MyStates;
 
@@ -37,24 +38,6 @@ public class PlayerControl : MonoBehaviour
         MyStates = new bool[] { true, true, true, true, true, true };
     }
 
-    public void RoundEnd()
-    {
-        RobotDown = GameObject.FindGameObjectWithTag("RobotDown");
-
-        Remain();
-        
-        Vector3 tmpPosition = RobotDown.transform.position;
-        RobotDown.transform.position = transform.position;
-        transform.position = tmpPosition;
-
-        bool[] tmpState = RobotDown.GetComponent<RobotDown>().GetStateData();
-        RobotDown.GetComponent<RobotDown>().Init(MyStates);
-        MyStates = tmpState;
-
-        Init(MyStates);
-    }
-
-
     public void Init(bool[] parts)
     {
         Item1 = 8;
@@ -62,7 +45,7 @@ public class PlayerControl : MonoBehaviour
         Speed = 1f;
         HandCount = 0;
 
-        isBlind = parts[0];
+        isBlind = !parts[0];
         if (parts[1]) HandCount++;
         if (parts[2]) HandCount++;
         if (parts[3]) Speed += 1f;
@@ -72,6 +55,12 @@ public class PlayerControl : MonoBehaviour
         playerSpriteController.SetPart(parts);
 
         MyStates = parts;
+    }
+
+    public void CheckBlind()
+    {
+        if(isBlind) BlindEffect.SetActive(true);
+        else BlindEffect.SetActive(false);
     }
 
     public bool[] Remain()
@@ -120,9 +109,6 @@ public class PlayerControl : MonoBehaviour
             }
             rigidbody.velocity = GetMovement(movement) * Speed;
         }
-
-
-
         direction = movement;
     }
 

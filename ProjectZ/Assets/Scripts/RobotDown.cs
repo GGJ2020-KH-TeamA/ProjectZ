@@ -49,7 +49,7 @@ public class RobotDown : MonoBehaviour {
     public bool IsAllFix
     {
         get {
-            return headState == PartState.Normal && leftHandState == PartState.Normal && rightHandState == PartState.Normal && leftLegState == PartState.Normal && rightHandState == PartState.Normal && batteryState == PartState.Normal;
+            return headState == PartState.Normal && leftHandState == PartState.Normal && rightHandState == PartState.Normal && leftLegState == PartState.Normal && rightLegState == PartState.Normal && batteryState == PartState.Normal;
         }
     }
 

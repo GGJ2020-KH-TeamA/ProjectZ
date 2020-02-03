@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PobotDownNeedDialog : MonoBehaviour
+public class RobotDownNeedDialog : MonoBehaviour
 {
     public RobotDown RobotDown;
     public GameObject Need1;
